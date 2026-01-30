@@ -42,14 +42,14 @@ BOSS_CONTENT_MAP = {
     "Whisper of Jormag": ("IBS Strikes", "Whisper", 2),
     "Fraenir of Jormag": ("IBS Strikes", "Fraenir", 3),
     "Voice of the Fallen": ("IBS Strikes", "Voice and Claw", 4),
-    "Icebrood Construct": ("IBS Strikes", "Icebrood Consruct", 5),
+    "Icebrood Construct": ("IBS Strikes", "Icebrood Construct", 5),
 
     # Strikes - End of Dragons
     "Captain Mai Train": ("EoD Strikes", "Aetherblade", 1),
     "Ankka": ("EoD Strikes", "Junkyard", 2),
     "Minister Li": ("EoD Strikes", "KO", 3),
     "The Dragonvoid": ("EoD Strikes", "HT", 4),
-    "Prototype Vermilion": ("EoD Strikes, OLC", 5),
+    "Prototype Vermilion": ("EoD Strikes", "OLC", 5),
 
     # Strikes - Secrets of the Obscure
     "Dagda": ("Wing 8", "CO", 1), 

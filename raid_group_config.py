@@ -35,43 +35,33 @@ CORE_MEMBERS = {
     "Sylo Johnson.4172"
 }
 
-def is_raid_session(player_dict):
+def is_raid_session(players: dict) -> bool:
     """
-    Determine if a session should be included based on simplified criteria.
-    
+    Determine if a session should be included based on core members.
+
     Args:
-        player_dict (dict): Dictionary of player objects from the dps.report API response
-                           Keys are character names, values are player objects
-    
+        players (dict): Dictionary of DPS.report player objects
+                        Keys are character names,
+                        values are dicts with fields like 'display_name'
     Returns:
         bool: True if session meets raid criteria, False otherwise
     """
-    if not player_dict:
+    if not isinstance(players, dict) or not players:
         return False
-    
-    # Must be exactly 10 players
-    if len(player_dict) != 10:
+
+    # Must have exactly 10 players
+    if len(players) != 10:
         return False
-    
-    # Count core members by extracting account names from player objects
+
+    # Count core members using display_name (account names only)
     core_count = 0
-    for character_name, player in player_dict.items():
-        if isinstance(player, dict):
-            # Try display_name first (account name), then character_name
-            account_name = player.get("display_name", "")
-            if not account_name:
-                account_name = player.get("character_name", "")
-            
-            if account_name in CORE_MEMBERS:
-                core_count += 1
-        else:
-            # This should not happen if DPS.report always returns dicts
-            # But if it does, log it as a bug
-            print(f"[Filtering] Unexpected player format: {player}")
-            return False
-    
-    # Must have at least 5 core members
+    for _, player in players.items():
+        account_name = player.get("display_name", "")
+        if account_name in CORE_MEMBERS:
+            core_count += 1
+
     return core_count >= 5
+
 
 
 def get_core_member_count(player_dict):
