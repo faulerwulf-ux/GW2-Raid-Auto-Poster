@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Test script for the enhanced raid tool using real log files.
-This script tests success/failure detection, CM detection, and multiple clears.
+This script tests success/failure detection, CM detection, multiple clears, and raid group filtering.
 """
 
 import os
@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from main import RaidSession, upload_log_to_dps_report, get_boss_name_from_log
 from content_map import BOSS_CONTENT_MAP
+from raid_group_config import get_core_member_count
 
 
 def test_real_logs():
@@ -71,6 +72,7 @@ def test_real_logs():
             is_cm = upload_result.get("is_cm", False)
             player_count = upload_result.get("player_count", 0)
             permalink = upload_result.get("permalink", "")
+            players = upload_result.get("players", {})
             
             print(f"✅ Upload successful!")
             print(f"   Success: {success}")
@@ -78,8 +80,21 @@ def test_real_logs():
             print(f"   Players: {player_count}")
             print(f"   Link: {permalink}")
             
-            # Add to session (this will apply all our enhanced logic)
-            session.add_log(log_path)
+            # Show raw player objects to debug JSON structure
+            print(f"   Raw player objects from API:")
+            for i, (character_name, player) in enumerate(players.items(), 1):
+                print(f"     {i}. {character_name}: {player}")
+            
+            # Show raid group filtering results using raw player objects
+            core_count = get_core_member_count(players)
+            print(f"   Core members: {core_count}/5")
+            
+            if core_count >= 5:
+                print(f"   ✅ Raid session accepted - adding to session")
+                # Add to session (this will apply all our enhanced logic)
+                session.add_log(log_path)
+            else:
+                print(f"   ❌ Raid session rejected (insufficient core members) - not adding to session")
             
         else:
             print("❌ Upload failed!")
@@ -119,6 +134,7 @@ def test_real_logs():
         print("✅ Success/failure detection working")
         print("✅ CM detection working")
         print("✅ Multiple clears working")
+        print("✅ Raid group filtering working")
     else:
         print("⚠️  No successful clears found (may be expected if all attempts failed)")
 
