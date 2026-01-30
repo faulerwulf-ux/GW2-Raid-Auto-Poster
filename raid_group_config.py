@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+from logger_setup import setup_logger
+logger = setup_logger()
+
 """
 Raid Group Configuration
 
@@ -6,13 +8,12 @@ This file contains the configuration for raid group filtering.
 Edit this file to add, remove, or modify group members.
 
 Usage:
-- Add player names to the CORE_MEMBERS list
+- Add player names to the CORE_MEMBERS set
 - All members in this list can be raid commanders
 - The scoring system will use this list to filter raid sessions
 """
 
 # Core group members (including raid commanders)
-# Add/remove player names here as needed
 CORE_MEMBERS = {
     "Piroko.1209",
     "Viven Alencia.9125",
@@ -63,7 +64,6 @@ def is_raid_session(players: dict) -> bool:
     return core_count >= 5
 
 
-
 def get_core_member_count(player_dict):
     """Get count of core members in the session."""
     if not player_dict:
@@ -80,24 +80,6 @@ def get_core_member_count(player_dict):
             if account_name in CORE_MEMBERS:
                 core_count += 1
         else:
-            # This should not happen if DPS.report always returns dicts
-            # But if it does, log it as a bug
-            print(f"[Filtering] Unexpected player format: {player}")
+            logger.warning("[Filtering] Unexpected player format: %s", player)
     
     return core_count
-
-
-if __name__ == "__main__":
-    # Example usage and testing
-    print("Raid Group Configuration")
-    print(f"Core members: {len(CORE_MEMBERS)}")
-    
-    # Example test
-    test_players = ["Player1", "Player2", "Player3", "Player4", "Player5", 
-                   "Random1", "Random2", "Random3", "Random4", "Random5"]
-    
-    core_count = get_core_member_count(test_players)
-    is_raid = is_raid_session(test_players)
-    
-    print(f"\nTest session core members: {core_count}/5")
-    print(f"Is raid session: {is_raid}")
