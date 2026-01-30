@@ -13,7 +13,7 @@ Usage:
 
 # Core group members (including raid commanders)
 # Add/remove player names here as needed
-CORE_MEMBERS = [
+CORE_MEMBERS = {
     "Piroko.1209",
     "Viven Alencia.9125",
     "Iota.4967",
@@ -33,7 +33,7 @@ CORE_MEMBERS = [
     "fugepopers.2165",
     "Rytus.6985",
     "Sylo Johnson.4172"
-]
+}
 
 def is_raid_session(player_dict):
     """
