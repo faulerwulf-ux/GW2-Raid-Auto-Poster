@@ -45,7 +45,7 @@ BOSS_CONTENT_MAP = {
     "Icebrood Construct": ("IBS Strikes", "Icebrood Construct", 5),
 
     # Strikes - End of Dragons
-    "Captain Mai Train": ("EoD Strikes", "Aetherblade", 1),
+    "Captain Mai Trin": ("EoD Strikes", "Aetherblade", 1),
     "Ankka": ("EoD Strikes", "Junkyard", 2),
     "Minister Li": ("EoD Strikes", "KO", 3),
     "The Dragonvoid": ("EoD Strikes", "HT", 4),

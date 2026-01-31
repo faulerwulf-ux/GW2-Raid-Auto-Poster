@@ -1,0 +1,13 @@
+2026-01-30 20:10:32 | INFO | Final arcdps log detected: C:\Users\deven\Documents\GUILD WARS 2\addons\arcdps\arcdps.cbtlogs\Standard Kitty Golem (16199)\20260130-201032.zevtc
+2026-01-30 20:10:34 | INFO | [Upload] Uploaded: https://dps.report/oqTe-20260130-201032_golem (Success: True, Boss: Standard Kitty Golem, Players: 1, CM: False)
+2026-01-30 20:10:34 | INFO | [Session] Starting new session
+2026-01-30 20:10:34 | INFO | [Session] Added successful Standard Kitty Golem (Kitty) to TestGolem: C:\Users\deven\Documents\GUILD WARS 2\addons\arcdps\arcdps.cbtlogs\Standard Kitty Golem (16199)\20260130-201032.zevtc
+2026-01-30 20:10:35 | INFO | [Discord] Session posted.
+2026-01-30 20:11:37 | INFO | Final arcdps log detected: C:\Users\deven\Documents\GUILD WARS 2\addons\arcdps\arcdps.cbtlogs\Standard Kitty Golem (16199)\20260130-201137.zevtc
+2026-01-30 20:11:40 | INFO | [Upload] Uploaded: https://dps.report/L3r0-20260130-201137_golem (Success: True, Boss: Standard Kitty Golem, Players: 1, CM: False)
+2026-01-30 20:11:40 | INFO | [Session] Added successful Standard Kitty Golem (Kitty) to TestGolem: C:\Users\deven\Documents\GUILD WARS 2\addons\arcdps\arcdps.cbtlogs\Standard Kitty Golem (16199)\20260130-201137.zevtc
+2026-01-30 20:11:40 | INFO | [Discord] Session updated.
+2026-01-30 20:14:49 | INFO | GW2 closed. Waiting grace period...
+2026-01-30 20:15:20 | INFO | [Session] GW2 closed beyond grace period, ending session.
+2026-01-30 20:15:20 | INFO | [Discord] Session updated.
+2026-01-30 20:15:20 | INFO | Tool shutting down.
