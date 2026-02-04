@@ -180,6 +180,9 @@ class RaidSession:
         return "\n".join(lines)
 
     def post_or_update_discord(self):
+        if not any(self.display_links.values()):
+            logger.info("[Discord] Skipping post — session has no successful kills.")
+            return
         message = self.to_discord_message()
         if self.discord_message_id is None:
             self.discord_message_id = post_to_discord(message)
