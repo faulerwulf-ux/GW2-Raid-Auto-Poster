@@ -1,9 +1,0 @@
-2026-02-11 20:38:22 | INFO | Final arcdps log detected: 
-C:\Users\deven\Documents\GUILD WARS 2\addons\arcdps\arcdps.cbtlogs\Standard Kitty Golem (16199)\20260211-203822.zevtc
-2026-02-11 20:38:25 | INFO | [Upload] Uploaded: https://dps.report/90j9-20260211-203822_golem 
-(Success: True, Boss: Standard Kitty Golem, Players: 1, CM: False)
-2026-02-11 20:38:25 | INFO | [Session] Starting new session
-2026-02-11 20:38:25 | INFO | [Session] Player display_names: ['Piroko.1209']
-2026-02-11 20:38:25 | INFO | [Session] Core count: 1/0
-2026-02-11 20:38:25 | INFO | [Session] Skipped non-raid boss 'Standard Kitty Golem'
-2026-02-11 20:38:25 | INFO | [Discord] Skipping post — session has no successful kills.
