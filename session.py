@@ -1,7 +1,7 @@
 from collections import defaultdict
 from datetime import datetime, timedelta
 
-from config import BOSS_CONTENT_MAP, is_raid_session, TRACKED_FAIL_BOSSES
+from config import BOSS_CONTENT_MAP, is_raid_session, TRACKED_FAIL_BOSSES, get_core_member_count, CORE_COUNT_MINIMUM
 from discord_utils import post_to_discord, edit_discord_message
 from logger import setup_logger
 from uploader import get_boss_name_from_log  # For folder-based boss name
@@ -18,26 +18,22 @@ class RaidSession:
         self.discord_message_id: str | None = None
 
     def add_log(self, log_path: str, upload_result: dict):
-        """
-        Add successful log to session if it meets criteria.
-        
-        Args:
-            log_path (str): Path to log.
-            upload_result (dict): Result from upload.
-        """
+        # Add successful log to session if it meets criteria.
         self.last_log_time = datetime.now()
         if not upload_result:
             return
 
         players = upload_result.get("players", {})
+        
         if not is_raid_session(players):
-            logger.info("[Session] Skipping log with insufficient core members: %s", log_path)
+            core_count = get_core_member_count(players)   # Get the actual number for logging
+            logger.info("[Session] Skipping log — insufficient core members (%d/%d) or not 10 players", core_count, CORE_COUNT_MINIMUM)
             return
 
-        # Use folder-based boss name for consistency with original approach
+        # Use folder-based boss name since we don't know what the API returns
         boss_name = get_boss_name_from_log(log_path)
         if boss_name not in BOSS_CONTENT_MAP:
-            logger.info("[Session] Skipped non-raid boss '%s': %s", boss_name, log_path)
+            logger.info("[Session] Skipped non-raid boss '%s'", boss_name)
             return
 
         if not upload_result.get("success", False) and boss_name not in TRACKED_FAIL_BOSSES:
@@ -56,7 +52,7 @@ class RaidSession:
             'order': order,
             'display_name': display_name
         })
-        logger.info("[Session] Added successful %s (%s) to %s: %s", boss_name, display_name, wing, log_path)
+        logger.info("[Session] Added successful %s (%s) to %s", boss_name, display_name, wing)
 
     def has_inactivity(self, threshold_minutes: int) -> bool:
         """Check if session is inactive."""

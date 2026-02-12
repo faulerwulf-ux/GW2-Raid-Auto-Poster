@@ -2,7 +2,8 @@ import logging
 import os
 from datetime import datetime
 
-from config import LOG_FOLDER, MAX_LOGS  # Import from new config
+LOG_FOLDER = "logs"
+MAX_LOGS = 3
 
 def cleanup_old_logs():
     """Keeps only the last MAX_LOGS log files, deletes older ones."""

@@ -16,15 +16,10 @@ class LogHandler(FileSystemEventHandler):
         if event.is_directory or not is_final_zevtc(event.dest_path):
             return
 
-        logger.info("Final arcdps log detected: %s", event.dest_path)
+        logger.info("Final arcdps log detected: \n%s", event.dest_path)
 
         upload_result = upload_log_to_dps_report(event.dest_path)
         if not upload_result:
-            return
-
-        players = upload_result.get("players")
-        if not is_raid_session(players):
-            logger.info("[Session] Log skipped (not enough core members)")
             return
 
         # Get or create session using mutable ref

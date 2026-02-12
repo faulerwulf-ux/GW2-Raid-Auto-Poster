@@ -56,7 +56,7 @@ def upload_log_to_dps_report(log_path: str) -> dict | None:
         }
 
         logger.info(
-            "[Upload] Uploaded: %s (Success: %s, Boss: %s, Players: %s, CM: %s)",
+            "[Upload] Uploaded: %s \n(Success: %s, Boss: %s, Players: %s, CM: %s)",
             permalink, result["success"], result["boss_name"], result["player_count"], result["is_cm"]
         )
         return result

@@ -12,6 +12,7 @@ MAX_LOGS = 3
 LOG_DIR = r"C:\Users\deven\Documents\GUILD WARS 2\addons\arcdps\arcdps.cbtlogs"
 INACTIVITY_THRESHOLD_MINUTES = 180
 GW2_EXIT_GRACE_SECONDS = 30
+CORE_COUNT_MINIMUM = 5
 
 # Core members
 CORE_MEMBERS = {
@@ -96,15 +97,16 @@ BOSS_CONTENT_MAP = {
 
     # New encounter
     "Kela, Seneschal of Waves":("VoE", "Crab", 1),
-    #"Standard Kitty Golem":("Golem", "Standard Kitty", 2),
-    #"Medium Kitty Golem":("Golem", "Medium Kitty", 3),
-    #"Large Kitty Golem":("Golem", "Large Kitty", 4),
+    #"Standard Kitty Golem":("Golems", "Standard Kitty", 2),
+    #"Medium Kitty Golem":("Golems", "Medium Kitty", 3),
+    #"Large Kitty Golem":("Golems", "Large Kitty", 4),
 }
 
 # Bosses for which to track and include failed attempts.
 # Use exact names from BOSS_CONTENT_MAP keys (e.g., "Cerus", "Qadim").
 TRACKED_FAIL_BOSSES = {
-    "Kela, Seneschal of Waves"
+    "Kela, Seneschal of Waves",
+    "Deimos"
 }
 
 def is_raid_session(players: dict) -> bool:
@@ -117,13 +119,14 @@ def is_raid_session(players: dict) -> bool:
         bool: True if >=5 core members and exactly 10 players.
     """
     if not isinstance(players, dict) or len(players) != 10:
+        logger.info("[Session] Player count is not 10: %s", len(players))
         return False
     core_count = sum(1 for p in players.values() if p.get("display_name", "") in CORE_MEMBERS)
     logger = setup_logger()
     display_names = [p.get("display_name", "UNKNOWN") for p in players.values()]  # Use "UNKNOWN" for missing/empty
     logger.info("[Session] Player display_names: %s", display_names)
-    logger.info("[Session] Core count: %s", core_count)
-    return core_count >= 5
+    logger.info("[Session] Core count: %s/%s", core_count, CORE_COUNT_MINIMUM)
+    return core_count >= CORE_COUNT_MINIMUM
 
 def get_core_member_count(players: dict) -> int:
     """
